@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
+<!-- <script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.7/dist/global/Rx.umd.js"></script> -->
+<script src="../js/rxjs.js"></script>
+<script>
+  var handler = () => {
+    console.log("Clicked!");
+  };
+  // document.body.addEventListener("click", handler);
+
+  // // 5.0版本
+  Rx.Observable.fromEvent(document.body, "click") // 注册监听
+    .subscribe(console.log);
+
+  // 6.0版本
+  // rxjs.fromEvent(document, "click").subscribe(() => console.log("Clicked!"));
+  rxjs.fromEvent(document, "click")
+    .scan(count => count + 1, 0)
+    .subscribe(count => console.log(`Clicked ${count} times`));
+</script>
